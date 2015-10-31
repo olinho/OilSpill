@@ -1,8 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import model.*;
 
 import java.awt.Graphics;
+import java.awt.event.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,6 +18,33 @@ import java.awt.Graphics;
  */
 public class mainGui extends JFrame {
 
+		private Algo a;
+		private int ileAgentow;
+		private Wind wind;
+	    private JPanel buttonPanel;
+	    private JPanel windPanel;
+	    private JButton okButton;
+	    private JEditorPane jEditorPane1;
+	    private JLabel windLabel;
+	    private JLabel wspLabel;
+	    private JLabel powerLabel;
+	    private JPanel jmainGui;
+	    private JScrollPane jScrollPane2;
+	    private JTextField powerTextField;
+	    private JPanel titlePanel;
+	    private JButton enythingButton;
+	    private JLabel title;
+	    private ResultsPanel resultsPanel;
+	    private JButton startButton;
+	    private JLabel xLabel;
+	    private JLabel yLabel;
+	    private JTextField wspXTextField;
+	    private JTextField wspYTextField;
+	    private JLabel ileAgentowLabel;
+	    private JTextField ileAgentowField;
+//	    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+	    // End of variables declaration               
+	    
     /**
      * Creates new form mainGui
      */
@@ -42,14 +71,20 @@ public class mainGui extends JFrame {
         windPanel = new JPanel();
         windLabel = new JLabel();
         wspLabel = new JLabel();
-        wspTextField = new JTextField();
-        powerPanel = new JLabel();
+        powerLabel = new JLabel();
         powerTextField = new JTextField();
         okButton = new JButton();
         resultsPanel = new ResultsPanel();
         jScrollPane2 = new JScrollPane();
         jEditorPane1 = new JEditorPane();
-
+        xLabel = new JLabel();
+        yLabel = new JLabel();
+        wspXTextField = new JTextField();
+        wspYTextField = new JTextField();
+        ileAgentowLabel = new JLabel();
+        ileAgentowField = new JTextField();
+        
+        
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rozprzestrzenianie sie zanieczyszczen");
         setAutoRequestFocus(false);
@@ -94,8 +129,8 @@ public class mainGui extends JFrame {
         enythingButton.setActionCommand("Coś się wymyśli");
         enythingButton.setBorder(BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
         enythingButton.setMaximumSize(new java.awt.Dimension(170, 34));
-        enythingButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        enythingButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 enythingButtonActionPerformed(evt);
             }
         });
@@ -106,9 +141,15 @@ public class mainGui extends JFrame {
         startButton.setText("Start");
         startButton.setBorder(BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
         startButton.setMaximumSize(new java.awt.Dimension(170, 34));
-        startButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 startButtonActionPerformed(evt);
+            }
+        });
+        
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                okButtonActionPerformed(evt);
             }
         });
 
@@ -129,51 +170,64 @@ public class mainGui extends JFrame {
         wspLabel.setForeground(new java.awt.Color(2, 9, 126));
         wspLabel.setText("   Podaj współrzędne");
 
-        wspTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
-        wspTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wspTextFieldActionPerformed(evt);
-            }
-        });
+        wspYTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+        wspXTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
-        powerPanel.setForeground(new java.awt.Color(2, 9, 126));
-        powerPanel.setText(" Podaj siłę");
+        powerLabel.setForeground(new java.awt.Color(2, 9, 126));
+        powerLabel.setText(" Podaj siłę");
 
         powerTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
-        powerTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                powerTextFieldActionPerformed(evt);
-            }
-        });
+
 
         okButton.setForeground(new java.awt.Color(2, 9, 126));
         okButton.setText("OK");
+        
+        xLabel.setForeground(new java.awt.Color(2, 9, 126));
+        xLabel.setText("X:");
 
+        yLabel.setForeground(new java.awt.Color(2, 9, 126));
+        yLabel.setText("Y:");
+        
+        wspYTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+        wspYTextField.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+               
+            }
+        });
+
+        
         GroupLayout windPanelLayout = new GroupLayout(windPanel);
         windPanel.setLayout(windPanelLayout);
         windPanelLayout.setHorizontalGroup(
             windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(windPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(wspLabel)
                     .addGroup(windPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(wspTextField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(windPanelLayout.createSequentialGroup()
-                        .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(wspLabel)
-                            .addGroup(windPanelLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(windLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17))))
+                        .addComponent(windLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))))
             .addGroup(windPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(powerPanel))
-            .addGroup(windPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(okButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addComponent(powerTextField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
+            .addGroup(windPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(xLabel)
+                .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(windPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(powerLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(windPanelLayout.createSequentialGroup()
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(wspXTextField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(yLabel)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(wspYTextField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         windPanelLayout.setVerticalGroup(
             windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -182,16 +236,26 @@ public class mainGui extends JFrame {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(wspLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wspTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(wspXTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xLabel)
+                    .addComponent(yLabel)
+                    .addComponent(wspYTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(powerPanel)
+                .addComponent(powerLabel)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(powerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(okButton, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
+        
+        
+        ileAgentowLabel.setForeground(new java.awt.Color(2, 9, 126));
+        ileAgentowLabel.setText("Ilość agentów:");
 
+        ileAgentowField.setText("1000");
+        
         GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
         buttonPanel.setLayout(buttonPanelLayout);
         buttonPanelLayout.setHorizontalGroup(
@@ -201,8 +265,13 @@ public class mainGui extends JFrame {
                 .addGroup(buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(startButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(windPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(windPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(buttonPanelLayout.createSequentialGroup()
+                        .addComponent(ileAgentowLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ileAgentowField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap())
         );
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -211,7 +280,12 @@ public class mainGui extends JFrame {
                 .addComponent(startButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(windPanel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+               .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ileAgentowLabel)
+                    .addComponent(ileAgentowField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                
                 .addComponent(enythingButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -274,21 +348,24 @@ public class mainGui extends JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
 
-    private void enythingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+
+	private void startButtonActionPerformed(ActionEvent evt) {                                              
+        a = new Algo();
+        ileAgentow = Integer.parseInt(ileAgentowField.getText());
+        a.initialize(ileAgentow);
+       // a.simulate(g, wind.getX(), wind.getY());
+    }    
+	
+	private void okButtonActionPerformed(ActionEvent evt) {                                              
+        wind = new Wind(Double.parseDouble(wspXTextField.getText()), Double.parseDouble(wspYTextField.getText()), Integer.parseInt(powerTextField.getText()));
+    }  
+
+    private void enythingButtonActionPerformed(ActionEvent evt) {                                            
+       
     }                                           
 
-    private void wspTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void powerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }        
+   
     
         
 
@@ -329,22 +406,5 @@ public class mainGui extends JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private JPanel buttonPanel;
-    private JPanel windPanel;
-    private JButton okButton;
-    private JEditorPane jEditorPane1;
-    private JLabel windLabel;
-    private JLabel wspLabel;
-    private JLabel powerPanel;
-    private JPanel jmainGui;
-    private JScrollPane jScrollPane2;
-    private JTextField wspTextField;
-    private JTextField powerTextField;
-    private JPanel titlePanel;
-    private JButton enythingButton;
-    private JLabel title;
-    private ResultsPanel resultsPanel;
-    private JButton startButton;
-//    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
-    // End of variables declaration                   
+     
 }
