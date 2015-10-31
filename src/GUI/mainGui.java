@@ -1,6 +1,8 @@
 package GUI;
 
-import model.Algo;
+import javax.swing.*;
+
+import java.awt.Graphics;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +14,7 @@ import model.Algo;
  *
  * @author dawid
  */
-public class mainGui extends javax.swing.JFrame {
+public class mainGui extends JFrame {
 
     /**
      * Creates new form mainGui
@@ -30,25 +32,25 @@ public class mainGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jmainGui = new javax.swing.JPanel();
-        titlePanel = new javax.swing.JPanel();
-        title = new javax.swing.JLabel();
-        buttonPanel = new javax.swing.JPanel();
-        enythingButton = new javax.swing.JButton();
-        startButton = new javax.swing.JButton();
-        windPanel = new javax.swing.JPanel();
-        windLabel = new javax.swing.JLabel();
-        wspLabel = new javax.swing.JLabel();
-        wspTextField = new javax.swing.JTextField();
-        powerPanel = new javax.swing.JLabel();
-        powerTextField = new javax.swing.JTextField();
-        okButton = new javax.swing.JButton();
-        resultsPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-//        w nim rysujemy symulacj�
-        jEditorPane1 = new javax.swing.JEditorPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jmainGui = new JPanel();
+        titlePanel = new JPanel();
+        title = new JLabel();
+        buttonPanel = new JPanel();
+        enythingButton = new JButton();
+        startButton = new JButton();
+        windPanel = new JPanel();
+        windLabel = new JLabel();
+        wspLabel = new JLabel();
+        wspTextField = new JTextField();
+        powerPanel = new JLabel();
+        powerTextField = new JTextField();
+        okButton = new JButton();
+        resultsPanel = new ResultsPanel();
+        jScrollPane2 = new JScrollPane();
+        jEditorPane1 = new JEditorPane();
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rozprzestrzenianie sie zanieczyszczen");
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(92, 117, 223));
@@ -59,7 +61,7 @@ public class mainGui extends javax.swing.JFrame {
         jmainGui.setBackground(new java.awt.Color(166, 230, 239));
 
         titlePanel.setBackground(new java.awt.Color(95, 155, 228));
-        titlePanel.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 2, 10, 2, new java.awt.Color(1, 7, 110)));
+        titlePanel.setBorder(BorderFactory.createMatteBorder(10, 2, 10, 2, new java.awt.Color(1, 7, 110)));
         titlePanel.setForeground(new java.awt.Color(20, 18, 84));
         titlePanel.setToolTipText("");
 
@@ -67,22 +69,22 @@ public class mainGui extends javax.swing.JFrame {
         title.setForeground(new java.awt.Color(11, 11, 67));
         title.setText("Symulacja rozprzestrzeniania się ropy naftowej na wodzie");
 
-        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout(titlePanel);
+        GroupLayout titlePanelLayout = new GroupLayout(titlePanel);
         titlePanel.setLayout(titlePanelLayout);
         titlePanelLayout.setHorizontalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            titlePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(titlePanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(title)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         titlePanelLayout.setVerticalGroup(
-            titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            titlePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(title, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         buttonPanel.setBackground(new java.awt.Color(95, 155, 228));
-        buttonPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(8, 2, 8, 2, new java.awt.Color(1, 7, 110)));
+        buttonPanel.setBorder(BorderFactory.createMatteBorder(8, 2, 8, 2, new java.awt.Color(1, 7, 110)));
         buttonPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         enythingButton.setBackground(new java.awt.Color(237, 254, 201));
@@ -90,7 +92,7 @@ public class mainGui extends javax.swing.JFrame {
         enythingButton.setForeground(new java.awt.Color(2, 9, 126));
         enythingButton.setText("Coś się wymyśli");
         enythingButton.setActionCommand("Coś się wymyśli");
-        enythingButton.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
+        enythingButton.setBorder(BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
         enythingButton.setMaximumSize(new java.awt.Dimension(170, 34));
         enythingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +104,7 @@ public class mainGui extends javax.swing.JFrame {
         startButton.setFont(new java.awt.Font("Droid Sans", 0, 18)); // NOI18N
         startButton.setForeground(new java.awt.Color(2, 9, 126));
         startButton.setText("Start");
-        startButton.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
+        startButton.setBorder(BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
         startButton.setMaximumSize(new java.awt.Dimension(170, 34));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,14 +113,14 @@ public class mainGui extends javax.swing.JFrame {
         });
 
         windPanel.setBackground(new java.awt.Color(95, 155, 228));
-        windPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 1, 4, 1, new java.awt.Color(3, 6, 176)));
+        windPanel.setBorder(BorderFactory.createMatteBorder(4, 1, 4, 1, new java.awt.Color(3, 6, 176)));
         windPanel.setForeground(new java.awt.Color(3, 6, 176));
         windPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         windLabel.setBackground(new java.awt.Color(214, 114, 14));
         windLabel.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         windLabel.setForeground(new java.awt.Color(2, 9, 126));
-        windLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        windLabel.setHorizontalAlignment(SwingConstants.CENTER);
         windLabel.setText("  WIATR");
 
      //   org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, titlePanel, org.jdesktop.beansbinding.ObjectProperty.create(), windLabel, org.jdesktop.beansbinding.BeanProperty.create("border"));
@@ -127,7 +129,7 @@ public class mainGui extends javax.swing.JFrame {
         wspLabel.setForeground(new java.awt.Color(2, 9, 126));
         wspLabel.setText("   Podaj współrzędne");
 
-        wspTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+        wspTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
         wspTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wspTextFieldActionPerformed(evt);
@@ -137,7 +139,7 @@ public class mainGui extends javax.swing.JFrame {
         powerPanel.setForeground(new java.awt.Color(2, 9, 126));
         powerPanel.setText(" Podaj siłę");
 
-        powerTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+        powerTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
         powerTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 powerTextFieldActionPerformed(evt);
@@ -147,134 +149,133 @@ public class mainGui extends javax.swing.JFrame {
         okButton.setForeground(new java.awt.Color(2, 9, 126));
         okButton.setText("OK");
 
-        javax.swing.GroupLayout windPanelLayout = new javax.swing.GroupLayout(windPanel);
+        GroupLayout windPanelLayout = new GroupLayout(windPanel);
         windPanel.setLayout(windPanelLayout);
         windPanelLayout.setHorizontalGroup(
-            windPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(windPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(windPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(windPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(wspTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(wspTextField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                     .addGroup(windPanelLayout.createSequentialGroup()
-                        .addGroup(windPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(wspLabel)
                             .addGroup(windPanelLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(windLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(windLabel, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)))
                         .addGap(17, 17, 17))))
             .addGroup(windPanelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(powerPanel))
             .addGroup(windPanelLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(windPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(powerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(okButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(powerTextField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
         );
         windPanelLayout.setVerticalGroup(
-            windPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(windPanelLayout.createSequentialGroup()
-                .addComponent(windLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wspLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wspTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(windLabel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wspLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wspTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(powerPanel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(powerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(powerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(okButton, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
-        javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
+        GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
         buttonPanel.setLayout(buttonPanelLayout);
         buttonPanelLayout.setHorizontalGroup(
-            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(enythingButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(windPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(startButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(windPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         buttonPanelLayout.setVerticalGroup(
-            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(windPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addComponent(enythingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(startButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(windPanel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(enythingButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
 
-        resultsPanel.setBackground(new java.awt.Color(144, 230, 155));
-        resultsPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(8, 2, 8, 2, new java.awt.Color(1, 7, 110)));
+        resultsPanel.setBackground(new java.awt.Color(95, 155, 228));
+        resultsPanel.setBorder(BorderFactory.createMatteBorder(8, 2, 8, 2, new java.awt.Color(1, 7, 110)));
 
         jScrollPane2.setViewportView(jEditorPane1);
 
-        javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
+        GroupLayout resultsPanelLayout = new GroupLayout(resultsPanel);
         resultsPanel.setLayout(resultsPanelLayout);
-        resultsPanelLayout.setHorizontalGroup(
-            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+     /*   resultsPanelLayout.setHorizontalGroup(
+            resultsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2)
         );
         resultsPanelLayout.setVerticalGroup(
-            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            resultsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2)
         );
-
-        javax.swing.GroupLayout jmainGuiLayout = new javax.swing.GroupLayout(jmainGui);
+*/
+        GroupLayout jmainGuiLayout = new GroupLayout(jmainGui);
         jmainGui.setLayout(jmainGuiLayout);
         jmainGuiLayout.setHorizontalGroup(
-            jmainGuiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jmainGuiLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jmainGuiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jmainGuiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jmainGuiLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(titlePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jmainGuiLayout.createSequentialGroup()
-                        .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(resultsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resultsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jmainGuiLayout.setVerticalGroup(
-            jmainGuiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jmainGuiLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jmainGuiLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jmainGuiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(titlePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jmainGuiLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(resultsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jmainGui, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jmainGui, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jmainGui, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jmainGui, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
   //      bindingGroup.bind();
 
         pack();
-        
     }// </editor-fold>                        
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        
+        // TODO add your handling code here:
     }                                             
 
     private void enythingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -287,8 +288,10 @@ public class mainGui extends javax.swing.JFrame {
 
     private void powerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }                                           
+    }        
     
+        
+
 
     /**
      * @param args the command line arguments
@@ -300,9 +303,9 @@ public class mainGui extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -312,7 +315,7 @@ public class mainGui extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(mainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(mainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(mainGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -326,23 +329,22 @@ public class mainGui extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JPanel buttonPanel;
-    private javax.swing.JPanel windPanel;
-    private javax.swing.JButton okButton;
-    private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JLabel windLabel;
-    private javax.swing.JLabel wspLabel;
-    private javax.swing.JLabel powerPanel;
-    private javax.swing.JPanel jmainGui;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField wspTextField;
-    private javax.swing.JTextField powerTextField;
-    private javax.swing.JPanel titlePanel;
-    private javax.swing.JButton enythingButton;
-    private javax.swing.JLabel title;
-    private javax.swing.JPanel resultsPanel;
-    private javax.swing.JButton startButton;
+    private JPanel buttonPanel;
+    private JPanel windPanel;
+    private JButton okButton;
+    private JEditorPane jEditorPane1;
+    private JLabel windLabel;
+    private JLabel wspLabel;
+    private JLabel powerPanel;
+    private JPanel jmainGui;
+    private JScrollPane jScrollPane2;
+    private JTextField wspTextField;
+    private JTextField powerTextField;
+    private JPanel titlePanel;
+    private JButton enythingButton;
+    private JLabel title;
+    private ResultsPanel resultsPanel;
+    private JButton startButton;
 //    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
-    private Algo algo;
     // End of variables declaration                   
 }
