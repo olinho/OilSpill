@@ -29,7 +29,6 @@ public class mainGui extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-    	initAlgo(20);
 
         jmainGui = new javax.swing.JPanel();
         titlePanel = new javax.swing.JPanel();
@@ -275,8 +274,7 @@ public class mainGui extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        algo.simulate(jEditorPane1.getGraphics(), 10, 0);
-        jEditorPane1.getGraphics().drawOval(20, 20, 10, 10);
+        
     }                                             
 
     private void enythingButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -291,11 +289,7 @@ public class mainGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                           
     
-    
-    private void initAlgo(int a) {
-    	
-    	algo = new Algo();
-    }
+
     /**
      * @param args the command line arguments
      */
