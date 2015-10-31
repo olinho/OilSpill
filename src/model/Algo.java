@@ -1,16 +1,7 @@
-package model;
-
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
-
-public class Algo {
+class Algo {
     boolean stopSimulation=false;
     private List<Agent> agentList;
  
-    public void Algo() {
-    	initialize(50);
-    }
     public void initialize(int agentNumber) {
         agentList =  new ArrayList<Agent>();
         for (int i = 0; i < agentNumber; i++) {
@@ -21,22 +12,33 @@ public class Algo {
             agentList.add(ag);
         }
     }
- 
-    public void simulate(Graphics g,int xWind,int yWind) {
+        //K=50000
+    public void simulate(Graphics g,double  xWind,double yWind) {
         int t=0;
         while(!stopSimulation){
            for(int a=0;a<agentList.size();a++){
-               agentList.get(a).setY(0);//policzona wartosc);
-               agentList.get(a).setX(0);//policzona wartosc);
+               computePosition(agentList.get(a),xWind, yWind);
            }
-//            g.clearRect();//czyszczenie poprzednich punktow
-            for(int a=0;a<agentList.size();a++) {//rysoanie aktualnych punktow
+            g.clearRect();// //TODO dac tu rozmiary tego pola w oknie
+            for(int a=0;a<agentList.size();a++) {
                 g.drawRect(agentList.get(a).getX(),agentList.get(a).getX(),1,1);
             }
         }
     }
  
     public void setStopSimulation(boolean stopSimulation) {
-        this.stopSimulation = stopSimulation;//jak klinknemy gdzies przycisk "Stop" to to sie ustawi na true i zatrzyma petle
+        this.stopSimulation = stopSimulation;
+    }
+ 
+    private void computePosition(Agent ag,double xWind,double yWind){
+        double K=50000.0; //TODO ten paramter powinien isc z gui
+        double xDeltaWind = 0.035*yWind;
+        double yDeltaWind = 0.035*xWind;
+        double randomXDelta = Math.random()*2-1+Math.sqrt(K*2*1);
+        double randomYDelta = Math.random()*2-1+Math.sqrt(K*2*1);
+ 
+        ag.setY((int) ((double)ag.getY()+yDeltaWind +randomXDelta));
+        ag.setX((int) ((double) ag.getX() + xDeltaWind + randomYDelta));
+ 
     }
 }
