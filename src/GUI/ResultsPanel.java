@@ -60,7 +60,7 @@ public class ResultsPanel extends JPanel {
         for(int i=0; i<700; i++) {
         	for(int j=0; j<570; j++){
         	  		
-        		x = mainGui.table2[i][j];
+        		x = mainGui.getTable2()[i][j];
 					if (x != 0){
 						c = new Color((int)(255-(255/mainGui.thickness*x)),(int)(255-(255/mainGui.thickness*x)),(int)(255-(255/mainGui.thickness*x)));
         	  			g.setColor(c);
