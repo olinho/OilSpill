@@ -2,10 +2,12 @@ package GUI;
  
 import model.Agent;
  
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
  
+
 import javax.swing.JPanel;
  
 public class ResultsPanel extends JPanel {
@@ -55,12 +57,12 @@ public class ResultsPanel extends JPanel {
         int t = 0;
       //  g.clearRect(2,8,707,573);// //TODO dac tu rozmiary tego pola w oknieG
         g.clearRect(0,0,700,570);
-        for(int i=0; i<700; i++)
+        for(int i=0; i<700; i++) {
         	for(int j=0; j<570; j++){
         	  		
         		x = mainGui.table2[i][j];
 					if (x != 0){
-						c = new Color((int)(255-(127*x)),(int)(255-(127*x)),(int)(255-(127*x)));
+						c = new Color((int)(255-(255/mainGui.thickness*x)),(int)(255-(255/mainGui.thickness*x)),(int)(255-(255/mainGui.thickness*x)));
         	  			g.setColor(c);
         			g.drawRect(i,j,1,1);
         	//		System.out.println((int) (mainGui.table2[i][j]*16));
@@ -69,6 +71,13 @@ public class ResultsPanel extends JPanel {
         		
         		 
         }
+        }
+        try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         revalidate();	
         
     }

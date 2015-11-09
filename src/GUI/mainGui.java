@@ -20,6 +20,11 @@ import model.*;
  */
 public class mainGui extends JFrame {
 
+	double windRatio; 	//wspó³czynnik poziomy i pionowy wiatru
+	String xDir;
+	String yDir;
+	String windPow;
+	static double thickness=2;
 	 double [][] temp = new double[700][570];
 	static double[][] table2 = new double[700][570];
 	static byte[][] table;
@@ -47,6 +52,8 @@ public class mainGui extends JFrame {
 	private JTextField wspYTextField;
 	private JLabel ileAgentowLabel;
 	private JTextField ileAgentowField;
+	private JLabel jakiePoleLabel;
+	private JTextField jakiePoleField;
 	
 	Random generator = new Random();
 	//          private org.jdesktop.beansbinding.BindingGroup bindingGroup;
@@ -56,9 +63,19 @@ public class mainGui extends JFrame {
 	 * Creates new form mainGui
 	 */
 	 public mainGui() {
+		 initRatios();
 		initComponents();
 	}
 
+	 /**
+	  * Inicjalizacja wspó³czynników, i danych do modelu matematycznego
+	  */
+	 public void initRatios() {
+		xDir = "2";
+		yDir = "3";
+		windPow = "10";
+		windRatio = 0.03;
+	 }
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -177,16 +194,17 @@ public class mainGui extends JFrame {
 		 //     bindingGroup.addBinding(binding);
 
 		 wspLabel.setForeground(new java.awt.Color(2, 9, 126));
-		 wspLabel.setText("   Podaj wspó³rzêdne");
+		 wspLabel.setText("   Podaj kierunek wiatru");
 
 		 wspYTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 		 wspXTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+		 wspXTextField.setText(xDir);
 
 		 powerLabel.setForeground(new java.awt.Color(2, 9, 126));
 		 powerLabel.setText(" Podaj si³ê");
 
 		 powerTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
-
+		 powerTextField.setText(windPow);
 
 		 okButton.setForeground(new java.awt.Color(2, 9, 126));
 		 okButton.setText("OK");
@@ -198,6 +216,7 @@ public class mainGui extends JFrame {
 		 yLabel.setText("Y:");
 
 		 wspYTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+		 wspYTextField.setText(yDir);
 		 wspYTextField.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent evt) {
 
@@ -259,11 +278,12 @@ public class mainGui extends JFrame {
 								 .addGap(26, 26, 26))
 				 );
 
-
 		 ileAgentowLabel.setForeground(new java.awt.Color(2, 9, 126));
 		 ileAgentowLabel.setText("Iloœæ agentów:");
 
 		 ileAgentowField.setText("10");
+		 
+		 
 
 		 GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
 		 buttonPanel.setLayout(buttonPanelLayout);
@@ -359,7 +379,8 @@ public class mainGui extends JFrame {
 
 
 
-	 private void startButtonActionPerformed(ActionEvent evt) {                                              
+	 private void startButtonActionPerformed(ActionEvent evt) {  
+		 wind = new Wind(Double.parseDouble(wspXTextField.getText()), Double.parseDouble(wspYTextField.getText()), Integer.parseInt(powerTextField.getText()));
 		 a = new Algo();
 		 ileAgentow = Integer.parseInt(ileAgentowField.getText());
 		 int t = 0;
@@ -370,9 +391,9 @@ public class mainGui extends JFrame {
 			 }
 		 }
 		 
-		 for(int i=330; i<370; i++){
-			 for(int j=270; j<310; j++){
-				 table2[i][j] = 2;
+		 for(int i=330; i<330+ileAgentow; i++){
+			 for(int j=270; j<270+ileAgentow; j++){
+				 table2[i][j] = thickness;
 			 }
 		 }	 
 		 resultsPanel.draw();
@@ -415,11 +436,32 @@ public class mainGui extends JFrame {
 
 	 
 	 public void randomTable2(){
+		double xWind, yWind;
+		double xDirection, yDirection;
+		double sumOfWindRatios;
+		int windPower;
+		double pitagorasRatio;
+		double [] r = new double[10];			//wspó³czynniki w otoczeniu piksela r[5], którego wartoœæ wyliczamy, a pozosta³e uk³adaj¹ siê zgodnie z numeracj¹ klawiatruy na komórce
+
+		xDirection = wind.getX();
+		yDirection = wind.getY();
+		windPower = wind.getPower();
+		pitagorasRatio = Math.sqrt(Math.pow(xDirection, 2) + Math.pow(yDirection, 2));
+		xWind = countWindPower(xDirection, pitagorasRatio, windPower);
+		yWind = countWindPower(yDirection, pitagorasRatio, windPower);
 		
-		 
+		if (windPower == 0){
+			setDefaultRatios(r);
+		}
+		else {
+			setWindRatios(r, xWind, yWind);
+		}
+		sumOfWindRatios = sumOfArray(r);
+//		showRatios(pitagorasRatio, xWind, yWind, r, xDirection, yDirection, windPower);
 		 for(int i=1; i<699; i++){
 			 for(int j=1; j<569; j++){
-				 temp[i][j] = (2*(table2[i-1][j]+table2[i+1][j]+table2[i][j-1]+table2[i][j+1]) + 4*table2[i][j] + (table2[i-1][j-1] + table2[i+1][j+1] + table2[i-1][j+1] + table2[i+1][j-1]))/16;
+				 temp[i][j] = (r[2]*table2[i-1][j] + r[8]*table2[i+1][j] + r[4]*table2[i][j-1] + r[6]*table2[i][j+1] + r[5]*table2[i][j] + r[1]*table2[i-1][j-1] + r[9]*table2[i+1][j+1] + r[3]*table2[i-1][j+1] + r[7]*table2[i+1][j-1])/sumOfWindRatios;
+//				 temp[i][j] = (2*(table2[i-1][j]+table2[i+1][j]+table2[i][j-1]+table2[i][j+1]) + 4*table2[i][j] + (table2[i-1][j-1] + table2[i+1][j+1] + table2[i-1][j+1] + table2[i+1][j-1]))/16;
 			 }
 		 }
 		 for(int i=0; i<700; i++){
@@ -429,6 +471,126 @@ public class mainGui extends JFrame {
 		 }
 		 
 	 }
+	 
+	 /**
+	  * Do zsumowania parametrów wiatru
+	  * @param r tablica
+	  * @return
+	  */
+	 public double sumOfArray(double [] r) {
+		 double sum = 0;
+		 for (int i=1; i<r.length; i++) 
+			 sum += r[i];
+		 return sum;
+	 }
+	 
+	 /**
+	  * Ustalamy wartoœci tablicy r, na podstawie kierunku, wartoœcii wspó³czynnika wiatru
+	  * @param r
+	  * @param xWind
+	  * @param yWind
+	  */
+	 public void setWindRatios(double [] r, double xWind, double yWind) {
+		 resetTab(r);
+		 double windXInfluence = windRatio * Math.abs(xWind);
+		 double windYInfluence = windRatio * Math.abs(yWind);
+		 r[5] = 1;
+		 if (xWind > 0 && yWind > 0) 	// SE wind
+		 {
+		 	r[1] = windXInfluence + windYInfluence;
+			r[2] = windYInfluence;
+			r[4] = windXInfluence;  
+		 }
+		 else if (xWind > 0 && yWind == 0)	// E
+		 {
+		 	r[4] = windXInfluence;
+		 }
+		 else if (xWind == 0 && yWind > 0)	// S
+		 {
+		 	r[2] = windYInfluence;
+		 }
+		 else if (xWind < 0 && yWind > 0) 	// SW wind
+		 {
+		 	r[3] = windXInfluence + windYInfluence;
+			r[2] = windYInfluence;
+			r[6] = windXInfluence;  
+		 }
+		 else if (xWind < 0 && yWind == 0)	// W
+		 {
+		 	r[6] = windXInfluence;
+		 }
+		 else if (xWind < 0 && yWind < 0) 	// NW wind
+		 {
+		 	r[9] = windXInfluence + windYInfluence;
+			r[8] = windYInfluence;
+			r[6] = windXInfluence;  
+		 }
+		 else if (xWind == 0 && yWind < 0)	// N
+		 {
+		 	r[8] = windYInfluence;
+		 }
+		 else if (xWind > 0 && yWind < 0) 	// NE wind
+		 {
+		 	r[7] = windXInfluence + windYInfluence;
+			r[8] = windYInfluence;
+			r[4] = windXInfluence;  
+		 }
+		 for (int i=1; i<r.length; i++) {
+			 if (r[i] > 1) 
+				 r[i] = 1;
+		 }
+	 }
+	 
+	 /*
+	  * Wyœwietla info o wspó³czynnikach i koñczy program
+	  */
+	 public void showRatios(double pitagorasRatio, double xWind, double yWind, double [] r, double xDir, double yDir, double windPower) {
+		 System.out.println("xDirection= " + xDir + "\t yDirection= " + yDir);
+		 System.out.println("WindPower = " + windPower);
+		 System.out.println("PitagorasRatio= " + pitagorasRatio + "\t windRatio = " + windRatio);
+		 System.out.println("xWind= " + xWind + "\t yWind= " + yWind );
+		 for (int i=1; i<=1; i++)
+			 System.out.println("r[" + i + "]= " + r[i]);
+		 
+		 System.exit(0);
+	 }
+	 
+
+	 /**
+	  * 
+	  * @param directionalValue kierunek wiatru i jego wartosc , czyli wind.getX() lub wind.getY()
+	  * @param pitagoras to, pitagorasRatio czyli sqrt(wind.getX()^2 + wind.getY()^2)
+	  * @param windPower
+	  * @return power of the wind in the certain direction
+	  */
+	 public double countWindPower(double directionalValue, double pitagoras, int windPower) {
+		 return directionalValue / pitagoras * windPower;
+	 }
+	 
+	 public void resetTab(double [] r) {
+		 for (int i=1; i< r.length; i++)
+			 r[i] = 0;
+	 }
+	 
+	 /*
+	  * tworzy standardow¹ maskê wspó³czynników, nr 5 jest indeksem rozpatrywanego w danym momencie piksela, a pozosta³e s¹ jego otoczeniem
+	  */
+	 public void setDefaultRatios(double[] r) {
+	 	int r1,r2,r3;
+	 	r1 = 1;
+	 	r2 = 2;
+	 	r3 = 4;
+		 r[1] = r1;
+		 r[3] = r1;
+		 r[7] = r1;
+		 r[9] = r1;
+		 r[2] = r2;
+		 r[4] = r2;
+		 r[6] = r2;
+		 r[8] = r2;
+		 r[5] = r3;
+	 }
+	 
 
 
 
