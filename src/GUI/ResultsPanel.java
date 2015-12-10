@@ -1,12 +1,10 @@
 package GUI;
  
 import model.Agent;
- 
-import java.awt.Color;
-import java.awt.Graphics;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
- 
-import javax.swing.JPanel;
  
 public class ResultsPanel extends JPanel {
        
@@ -55,7 +53,7 @@ public class ResultsPanel extends JPanel {
         Graphics g  = getGraphics();
         int t = 0;
       //  g.clearRect(2,8,707,573);// //TODO dac tu rozmiary tego pola w oknieG
-      //  g.clearRect(0,0,700,570);
+        g.clearRect(0,0,700,570);
         for(int i=0; i<700; i++)
         	for(int j=0; j<570; j++){
         	  		

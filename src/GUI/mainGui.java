@@ -1,13 +1,13 @@
 package GUI;
 
+import model.Algo;
+import model.Algo2;
+import model.Wind;
+
 import javax.swing.*;
-import model.*;
-
-import java.awt.Graphics;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
-
-import model.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -54,7 +54,7 @@ public class mainGui extends JFrame {
 	private JTextField wspYTextField;
 	private JLabel ileAgentowLabel;
 	private JTextField ileAgentowField;
-	
+
 	Random generator = new Random();
 	//          private org.jdesktop.beansbinding.BindingGroup bindingGroup;
 	// End of variables declaration              
@@ -105,7 +105,7 @@ public class mainGui extends JFrame {
 		 ileAgentowLabel = new JLabel();
 		 ileAgentowField = new JTextField();
 
-		 
+
 
 		 
 		 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -401,10 +401,14 @@ public class mainGui extends JFrame {
 		 */
 		 resultsPanel.draw();
 
-		 
-		 while(t<500){
-			 
-			 randomTable2();
+		 algo2.pradMorskiMaska(15.0,0,20.0);
+		 while(t<5000){
+			 if(t<100) algo2.dolewanie();
+             if(t % 100==0)System.out.println("time "+t);
+
+            algo2.randomtable2();
+             //algo2.parowanie();
+             algo2.pradyMorskie();
 			 resultsPanel.draw();
 			 t++;
 		/*	 try {
@@ -461,7 +465,7 @@ public class mainGui extends JFrame {
 			 }
 		 }
 		 */
-		 algo2.randomtable2();
+
 		 
 	 }
 
