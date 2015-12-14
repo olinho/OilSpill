@@ -3,6 +3,7 @@ package GUI;
 import model.CellularAlgorithm;
 import model.Wind;
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -14,15 +15,18 @@ import java.util.Random;
 public class mainGui extends JFrame {
 
 	CellularAlgorithm cellularAlgorithm;
+
 	private static double windRatio; 	//współczynnik poziomy i pionowy wiatru
 	String xDir;
 	String yDir;
 	String windPow;
+	static double thickness=2;
 
 	double [][] temp = new double[700][570];
 	static double[][] table2 = new double[708][578];
+	static double[][] poprzednia = new double[700][570];
 	static byte[][] table;
-	private double evaporationIntensivity;
+	private int wspParowania;
 	private Wind wind;
 	private JPanel buttonPanel;
 	private JPanel windPanel;
@@ -56,6 +60,17 @@ public class mainGui extends JFrame {
 	private JButton okButtonPrad;
 	private JLabel wspLabelPrad;
 	private JPanel pradPanel;
+
+	private JLabel wspLabel1;
+	private JLabel xLabel1;
+	private JTextField wspXSzerokoscField1;
+	private JLabel yLabel1;
+	private JTextField wspYSzerokoscField1;
+	private JLabel wspLabel2;
+	private JLabel xLabel2;
+	private JTextField wspXDlugoscField;
+	private JTextField wspYDlugoscField1;
+	private JLabel yLabel2;
 
 
 
@@ -115,7 +130,16 @@ public class mainGui extends JFrame {
 		okButtonPrad = new JButton();
 		wspLabelPrad = new JLabel();
 
-
+		wspLabel1 = new JLabel();
+		xLabel1 = new JLabel();
+		wspXSzerokoscField1 = new JTextField();
+		yLabel1 = new JLabel();
+		wspYSzerokoscField1 = new JTextField();
+		wspLabel2 = new JLabel();
+		xLabel2 = new JLabel();
+		wspXDlugoscField = new JTextField();
+		wspYDlugoscField1 = new JTextField();
+		yLabel2 = new JLabel();
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Rozprzestrzenianie sie zanieczyszczen");
 		setAutoRequestFocus(false);
@@ -212,7 +236,10 @@ public class mainGui extends JFrame {
 
 		okButton.setForeground(new java.awt.Color(2, 9, 126));
 		okButton.setText("OK");
+		
+		
 
+		
 		xLabel.setForeground(new java.awt.Color(2, 9, 126));
 		xLabel.setText("Y:");
 
@@ -278,7 +305,7 @@ public class mainGui extends JFrame {
 								.addComponent(powerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addGap(26, 26, 26))
+								.addGap(10, 10, 10))
 				);
 
 
@@ -318,72 +345,148 @@ public class mainGui extends JFrame {
 		yLabelPrad.setText("X:");
 
 		wspYTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
-		wspYTextFieldPrad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
 
-			}
-		});
+		wspLabel1.setForeground(new java.awt.Color(2, 9, 126));
+        wspLabel1.setText("Określ długość geo.");
+
+        xLabel1.setForeground(new java.awt.Color(2, 9, 126));
+        xLabel1.setText("X:");
+
+        wspXSzerokoscField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+
+        yLabel1.setForeground(new java.awt.Color(2, 9, 126));
+        yLabel1.setText("Y:");
+
+        wspYSzerokoscField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+
+        wspLabel2.setForeground(new java.awt.Color(2, 9, 126));
+        wspLabel2.setText("Określ szerokość geo.");
+
+        xLabel2.setForeground(new java.awt.Color(2, 9, 126));
+        xLabel2.setText("X:");
+
+        wspXDlugoscField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
 
-		GroupLayout pradPanelLayout = new GroupLayout(pradPanel);
-		pradPanel.setLayout(pradPanelLayout);
-		pradPanelLayout.setHorizontalGroup(
-				pradPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(pradPanelLayout.createSequentialGroup()
-						.addGap(4, 4, 4)
-						.addGroup(pradPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(wspLabelPrad)
-								.addGroup(pradPanelLayout.createSequentialGroup()
-										.addGap(20, 20, 20)
-										.addComponent(windLabelPrad, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE))))
-										.addGroup(pradPanelLayout.createSequentialGroup()
-												.addGap(25, 25, 25)
-												.addGroup(pradPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-														.addComponent(okButtonPrad, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-														.addComponent(powerTextFieldPrad, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
-														.addGroup(pradPanelLayout.createSequentialGroup()
-																.addContainerGap()
-																.addComponent(xLabelPrad)
-																.addGroup(pradPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-																		.addGroup(pradPanelLayout.createSequentialGroup()
-																				.addGap(24, 24, 24)
-																				.addComponent(powerLabelPrad)
-																				.addGap(0, 0, Short.MAX_VALUE))
-																				.addGroup(pradPanelLayout.createSequentialGroup()
-																						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																						.addComponent(wspXTextFieldPrad, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-																						.addGap(38, 38, 38)
-																						.addComponent(yLabelPrad)
-																						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																						.addComponent(wspYTextFieldPrad, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-																						.addContainerGap())))
-				);
-		pradPanelLayout.setVerticalGroup(
-				pradPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(pradPanelLayout.createSequentialGroup()
-						.addComponent(windLabelPrad, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(wspLabelPrad, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(pradPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-								.addComponent(wspXTextFieldPrad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(xLabelPrad)
-								.addComponent(yLabelPrad)
-								.addComponent(wspYTextFieldPrad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-								.addComponent(powerLabelPrad)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(powerTextFieldPrad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(okButtonPrad, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addGap(26, 26, 26))
-				);
+        yLabel2.setForeground(new java.awt.Color(2, 9, 126));
+        yLabel2.setText("Y:");
+
+        wspYDlugoscField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+
+        javax.swing.GroupLayout pradPanelLayout = new javax.swing.GroupLayout(pradPanel);
+        pradPanel.setLayout(pradPanelLayout);
+        pradPanelLayout.setHorizontalGroup(
+            pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pradPanelLayout.createSequentialGroup()
+                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pradPanelLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(powerLabelPrad))
+                    .addGroup(pradPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(xLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(wspXSzerokoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(yLabel1)
+                        .addGap(8, 8, 8)
+                        .addComponent(wspYSzerokoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pradPanelLayout.createSequentialGroup()
+                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pradPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(xLabelPrad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(wspXTextFieldPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(yLabelPrad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(wspYTextFieldPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pradPanelLayout.createSequentialGroup()
+                        .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pradPanelLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(wspLabelPrad)
+                                    .addGroup(pradPanelLayout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(windLabelPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pradPanelLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(powerTextFieldPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(pradPanelLayout.createSequentialGroup()
+                        .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pradPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(wspLabel1)
+                                    .addGroup(pradPanelLayout.createSequentialGroup()
+                                        .addComponent(xLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(wspXDlugoscField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(yLabel2)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(wspYDlugoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pradPanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(okButtonPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pradPanelLayout.createSequentialGroup()
+                    .addGap(2, 2, 2)
+                    .addComponent(wspLabel2)
+                    .addContainerGap(22, Short.MAX_VALUE)))
+        );
+        
+        pradPanelLayout.setVerticalGroup(
+            pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pradPanelLayout.createSequentialGroup()
+                .addComponent(windLabelPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wspLabelPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(wspXTextFieldPrad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yLabelPrad)
+                    .addComponent(wspYTextFieldPrad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xLabelPrad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(powerLabelPrad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(powerTextFieldPrad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xLabel1)
+                    .addComponent(wspXSzerokoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yLabel1)
+                    .addComponent(wspYSzerokoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(wspLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xLabel2)
+                    .addComponent(wspXDlugoscField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yLabel2)
+                    .addComponent(wspYDlugoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(okButtonPrad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pradPanelLayout.createSequentialGroup()
+                    .addContainerGap(152, Short.MAX_VALUE)
+                    .addComponent(wspLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(118, 118, 118)))
+        );
 
 
 		wspParowaniaLabel.setForeground(new java.awt.Color(2, 9, 126));
 		wspParowaniaLabel.setText("Wsp. parowania:");
 
-		wspParowaniaField.setText("0.3");
+		wspParowaniaField.setText("0.003");
 
 		GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
 		buttonPanel.setLayout(buttonPanelLayout);
@@ -393,9 +496,9 @@ public class mainGui extends JFrame {
 						.addContainerGap()
 						.addGroup(buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addComponent(startButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(windPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(pradPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								//.addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(windPanel, 150,150, 150)
+								.addComponent(pradPanel, 140,150,150)
 
 								.addGroup(buttonPanelLayout.createSequentialGroup()
 										.addComponent(wspParowaniaLabel)
@@ -408,19 +511,19 @@ public class mainGui extends JFrame {
 				buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(buttonPanelLayout.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(startButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+						.addComponent(startButton, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 						.addComponent(windPanel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 						.addGap(2, 2, 2)
-						.addComponent(pradPanel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
-						.addGap(32, 32, 32)
+						.addComponent(pradPanel, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+						.addGap(12, 12, 12)
 						.addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(wspParowaniaLabel)
 								.addComponent(wspParowaniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-
-								.addComponent(enythingButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-								.addGap(29, 29, 29))
+									)
+							//	.addComponent(enythingButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+							//	.addGap(29, 29, 29))
 				);
 
 		resultsPanel.setBackground(new java.awt.Color(95, 155, 228));
@@ -430,6 +533,15 @@ public class mainGui extends JFrame {
 
 		GroupLayout resultsPanelLayout = new GroupLayout(resultsPanel);
 		resultsPanel.setLayout(resultsPanelLayout);
+		/*   resultsPanelLayout.setHorizontalGroup(
+            resultsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+        );
+        resultsPanelLayout.setVerticalGroup(
+            resultsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+        );
+		 */
 		GroupLayout jmainGuiLayout = new GroupLayout(jmainGui);
 		jmainGui.setLayout(jmainGuiLayout);
 		jmainGuiLayout.setHorizontalGroup(
@@ -470,7 +582,7 @@ public class mainGui extends JFrame {
 		//      bindingGroup.bind();
 
 		pack();
-	}// </editor-fold>
+	}// </editor-fold>       
 
 
 
