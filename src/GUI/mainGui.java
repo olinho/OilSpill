@@ -29,6 +29,7 @@ public class mainGui extends JFrame {
 
 	double [][] temp = new double[700][570];
 	static double[][] table2 = new double[700][570];
+    static double[][] poprzednia = new double[700][570];
 	static byte[][] table;
 	private Algo a;
 	private int ileAgentow;
@@ -170,8 +171,8 @@ public class mainGui extends JFrame {
 		enythingButton.setBackground(new java.awt.Color(237, 254, 201));
 		enythingButton.setFont(new java.awt.Font("Droid Sans", 0, 18)); // NOI18N
 		enythingButton.setForeground(new java.awt.Color(2, 9, 126));
-		enythingButton.setText("Coś się wymyśli");
-		enythingButton.setActionCommand("Coś się wymyśli");
+		enythingButton.setText("");
+		enythingButton.setActionCommand("");
 		enythingButton.setBorder(BorderFactory.createMatteBorder(5, 2, 5, 2, new java.awt.Color(1, 7, 110)));
 		enythingButton.setMaximumSize(new java.awt.Dimension(170, 34));
 		enythingButton.addActionListener(new ActionListener() {
@@ -525,16 +526,28 @@ public class mainGui extends JFrame {
 		 */
 		resultsPanel.draw();
 
-		algo2.pradMorskiMaska(15.0,0,20.0);
+		algo2.pradMorskiMaska(Double.parseDouble(wspXTextFieldPrad.getText()),Double.parseDouble(wspYTextFieldPrad.getText()),Double.parseDouble(powerTextFieldPrad.getText()));
 		while(t<5000){
-			if(t<500) algo2.dolewanie();
+			if(t<300) algo2.dolewanie();
 			if(t % 100==0)System.out.println("time "+t);
 
 			algo2.randomtable2();
 			//algo2.parowanie();
 			algo2.pradyMorskie();
+           // System.arraycopy(table2, 0, poprzednia, 0, table.length);
 			resultsPanel.draw();
 			t++;
+
+
+
+
+
+
+
+
+
+
+
 			/*	 try {
 	           //     Thread.sleep(100);
 	            } catch (InterruptedException e) {

@@ -81,10 +81,10 @@ public class Algo2 {
         sasiedztwoMoooreaPrady[5] = 100/szybkosc;
         double normalizacja  = sumOfArray(sasiedztwoMoooreaPrady);
         for(int i=0; i< sasiedztwoMoooreaPrady.length;i++) sasiedztwoMoooreaPrady[i] /= normalizacja;
-
-        //System.out.println(sasiedztwoMoooreaPrady[1] + " " + sasiedztwoMoooreaPrady[2] + " " +sasiedztwoMoooreaPrady[3]);
-       // System.out.println(sasiedztwoMoooreaPrady[4] + " " + sasiedztwoMoooreaPrady[5] + " " +sasiedztwoMoooreaPrady[6]);
-       // System.out.println(sasiedztwoMoooreaPrady[7] + " " + sasiedztwoMoooreaPrady[8] + " " +sasiedztwoMoooreaPrady[9]);
+        System.out.println("xpradu:"+xPradu+"   yprdu:"+yPradu+"   szybkosc:"+szybkosc);
+        System.out.println(sasiedztwoMoooreaPrady[1] + " " + sasiedztwoMoooreaPrady[2] + " " +sasiedztwoMoooreaPrady[3]);
+       System.out.println(sasiedztwoMoooreaPrady[4] + " " + sasiedztwoMoooreaPrady[5] + " " +sasiedztwoMoooreaPrady[6]);
+       System.out.println(sasiedztwoMoooreaPrady[7] + " " + sasiedztwoMoooreaPrady[8] + " " +sasiedztwoMoooreaPrady[9]);
 
 
     }
@@ -93,10 +93,13 @@ public class Algo2 {
 
     public void pradyMorskie(){
         double[][] temp = new double[700][570];
+        for (int wiersz = 0; wiersz < 700; wiersz++) {
+            for (int kolumna = 0; kolumna < 570; kolumna++) {
+                temp[wiersz][kolumna] = table2[wiersz][kolumna];
+            }}
 
-
-        for (int wiersz = 1; wiersz < 699; wiersz++) {
-            for (int kolumna = 1; kolumna < 569; kolumna++) {
+        for (int wiersz = 350; wiersz < 699; wiersz++) {
+            for (int kolumna = 350; kolumna < 400; kolumna++) {
                 temp[wiersz][kolumna] = (table2[wiersz - 1][kolumna-1]*sasiedztwoMoooreaPrady[1] +
                         table2[wiersz - 1][kolumna]*sasiedztwoMoooreaPrady[2] +
                         table2[wiersz - 1][kolumna+1]*sasiedztwoMoooreaPrady[3] +

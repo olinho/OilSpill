@@ -56,7 +56,6 @@ public class ResultsPanel extends JPanel {
         g.clearRect(0,0,700,570);
         for(int i=0; i<700; i++)
         	for(int j=0; j<570; j++){
-        	  		
         		x = mainGui.table2[i][j];
 					if (x != 0){
 						if(x>17)
@@ -80,7 +79,7 @@ public class ResultsPanel extends JPanel {
 						//c = new Color((int)(255-(127*x/10)),(int)(255-(127*x/10)),(int)(255-(127*x/10)));
 						else c = new Color(0,0,255);
 						g.setColor(c);
-        			if (x>0.1) g.drawRect(i,j,1,1);
+        			if (x>0.1) g.drawRect(j,i,1,1);
         	//		System.out.println((int) (mainGui.table2[i][j]*16));
 					}
         		
