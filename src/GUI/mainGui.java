@@ -1,7 +1,6 @@
 package GUI;
 
-import model.Algo;
-import model.Algo2;
+import model.CellularAlgorithm;
 import model.Wind;
 
 import javax.swing.*;
@@ -20,7 +19,7 @@ import java.util.Random;
  */
 public class mainGui extends JFrame {
 
-	Algo2 algo2;
+	CellularAlgorithm cellularAlgorithm;
 	private static double windRatio; 	//współczynnik poziomy i pionowy wiatru
 	String xDir;
 	String yDir;
@@ -31,7 +30,6 @@ public class mainGui extends JFrame {
 	static double[][] table2 = new double[708][578];
     static double[][] poprzednia = new double[700][570];
 	static byte[][] table;
-	private Algo a;
 	private int wspParowania;
 	private Wind wind;
 	private JPanel buttonPanel;
@@ -498,9 +496,8 @@ public class mainGui extends JFrame {
 
 
 
-	private void startButtonActionPerformed(ActionEvent evt) {                                              
-		a = new Algo();
-		algo2 = new Algo2(this);
+	private void startButtonActionPerformed(ActionEvent evt) {
+		cellularAlgorithm = new CellularAlgorithm(this);
 		//wspParowania = Integer.parseInt(wspParowaniaField.getText());
 		int t = 0;
 
@@ -526,17 +523,17 @@ public class mainGui extends JFrame {
 		 */
 		resultsPanel.draw();
 
-		algo2.pradMorskiMaska(Double.parseDouble(wspXTextFieldPrad.getText()),Double.parseDouble(wspYTextFieldPrad.getText()),Double.parseDouble(powerTextFieldPrad.getText()));
+		cellularAlgorithm.setRatiosInCurrentNeighborhood(Double.parseDouble(wspXTextFieldPrad.getText()), Double.parseDouble(wspYTextFieldPrad.getText()), Double.parseDouble(powerTextFieldPrad.getText()));
 		while(t<5000){
 			
-			if(t<300) algo2.dolewanie();
+			if(t<300) cellularAlgorithm.addMoreOil();
 			if(t % 100==0)System.out.println("time "+t);
 
-			algo2.randomtable2();
-			//algo2.parowanie();
-			algo2.pradyMorskie();
+			cellularAlgorithm.randomtable2();
+			//algo2.evaporation();
+			cellularAlgorithm.pradyMorskie();
            // System.arraycopy(table2, 0, poprzednia, 0, table.length);
-			if(t%8 == 0)
+
 			resultsPanel.draw();
 			t++;
 

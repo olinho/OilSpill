@@ -2,26 +2,27 @@ package model;
 
 import GUI.mainGui;
 
-public class Algo2 {
+public class CellularAlgorithm {
     private static mainGui mg;
     Wind wind;
     static double windRatio = mg.getWindRatio();
     static double[][] table2 = mg.getTable2();
-    static double[] sasiedztwoMoooreaPrady = new double[10];
-    public Algo2(mainGui mg) {
+    static double[] MooreNeighborhood = new double[10];
+
+    public CellularAlgorithm(mainGui mg) {
         this.mg = mg;
     }
 
-    public void dolewanie() {
+    public void addMoreOil() {
         for (int i = 345; i < 355; i++) {
             for (int j = 285; j < 290; j++) {
-               table2[i][j] = table2[i][j] + 5;
+                table2[i][j] = table2[i][j] + 5;
             }
         }
 
     }
 
-    public void parowanie() {
+    public void evaporation() {
         for (int wiersz = 0; wiersz < table2.length; wiersz++) {
             for (int kolumna = 0; kolumna < table2[wiersz].length; kolumna++) {
                 if (table2[wiersz][kolumna] > 0.3) table2[wiersz][kolumna] = table2[wiersz][kolumna] - 0.3;
@@ -31,96 +32,83 @@ public class Algo2 {
         }
     }
 
-    public void pradMorskiMaska(double xPradu, double yPradu,double szybkosc){
-        //robienie masek mozna dac przed petla algorytmu bo w rzeciwym razie obliczmamy 3000 jedna i ta sama maske
-
-       //  123/456/789   gdzie 5 to punk centralny
-
-
-        double Pitagoras = Math.sqrt(Math.pow(xPradu,2)+Math.pow(yPradu, 2));
-
-        double naroznik = (Math.abs(yPradu)+Math.abs(yPradu)) /Pitagoras;
-        double skladowaX=Math.abs(xPradu)/Pitagoras;
-        double skladowaY=Math.abs(yPradu)/Pitagoras;
-        for(int i=0; i< sasiedztwoMoooreaPrady.length;i++) sasiedztwoMoooreaPrady[i]=0.0;
-
-        if (xPradu > 0 && yPradu> 0)    // Prawo Dol
+    public void setRatiosInCurrentNeighborhood(double xCurrent, double yCurrent, double currentPower) {
+        //  123/456/789   gdzie 5 to punk centralny
+        double Pitagoras = Math.sqrt(Math.pow(xCurrent, 2) + Math.pow(yCurrent, 2));
+        double naroznik = (Math.abs(yCurrent) + Math.abs(yCurrent)) / Pitagoras;
+        double skladowaX = Math.abs(xCurrent) / Pitagoras;
+        double skladowaY = Math.abs(yCurrent) / Pitagoras;
+        for (int i = 0; i < MooreNeighborhood.length; i++) MooreNeighborhood[i] = 0.0;
+        if (xCurrent > 0 && yCurrent > 0)    // Prawo Dol
         {
-            sasiedztwoMoooreaPrady[1] = naroznik;
-            sasiedztwoMoooreaPrady[2] = skladowaY;
-            sasiedztwoMoooreaPrady[4] = skladowaX;
-        }else if (xPradu> 0 && yPradu == 0)    // w Prawo
+            MooreNeighborhood[1] = naroznik;
+            MooreNeighborhood[2] = skladowaY;
+            MooreNeighborhood[4] = skladowaX;
+        } else if (xCurrent > 0 && yCurrent == 0)    // w Prawo
         {
             System.out.println("tu");
-            sasiedztwoMoooreaPrady[4] = 1;
-        }else if (xPradu > 0 && yPradu < 0)    // w prawo gore
+            MooreNeighborhood[4] = 1;
+        } else if (xCurrent > 0 && yCurrent < 0)    // w prawo gore
         {
-            sasiedztwoMoooreaPrady[7] = naroznik;
-            sasiedztwoMoooreaPrady[8] = skladowaY;
-            sasiedztwoMoooreaPrady[4] = skladowaX;
-        } else if (xPradu < 0 && yPradu  > 0)    // lewo dol
+            MooreNeighborhood[7] = naroznik;
+            MooreNeighborhood[8] = skladowaY;
+            MooreNeighborhood[4] = skladowaX;
+        } else if (xCurrent < 0 && yCurrent > 0)    // lewo dol
         {
-            sasiedztwoMoooreaPrady[3] = naroznik;
-            sasiedztwoMoooreaPrady[2] = skladowaY;
-            sasiedztwoMoooreaPrady[6] = skladowaX;
-        } else if (xPradu < 0 && yPradu == 0)    // w lewo
+            MooreNeighborhood[3] = naroznik;
+            MooreNeighborhood[2] = skladowaY;
+            MooreNeighborhood[6] = skladowaX;
+        } else if (xCurrent < 0 && yCurrent == 0)    // w lewo
         {
-            sasiedztwoMoooreaPrady[6] = 1;
-        } else if (xPradu < 0 && yPradu < 0)    // w gore lewo
+            MooreNeighborhood[6] = 1;
+        } else if (xCurrent < 0 && yCurrent < 0)    // w gore lewo
         {
-            sasiedztwoMoooreaPrady[9] = naroznik;
-            sasiedztwoMoooreaPrady[8] = skladowaY;
-            sasiedztwoMoooreaPrady[6] = skladowaX;
-        } else if (xPradu == 0 && yPradu < 0)    // w gore
+            MooreNeighborhood[9] = naroznik;
+            MooreNeighborhood[8] = skladowaY;
+            MooreNeighborhood[6] = skladowaX;
+        } else if (xCurrent == 0 && yCurrent < 0)    // w gore
         {
-            sasiedztwoMoooreaPrady[8] = 1;
-        }  else if (xPradu == 0 && yPradu > 0)    // w dol
+            MooreNeighborhood[8] = 1;
+        } else if (xCurrent == 0 && yCurrent > 0)    // w dol
         {
-            sasiedztwoMoooreaPrady[2] = 1;
+            MooreNeighborhood[2] = 1;
         }
-        sasiedztwoMoooreaPrady[5] = 100/szybkosc;
-        double normalizacja  = sumOfArray(sasiedztwoMoooreaPrady);
-        for(int i=0; i< sasiedztwoMoooreaPrady.length;i++) sasiedztwoMoooreaPrady[i] /= normalizacja;
-        System.out.println("xpradu:"+xPradu+"   yprdu:"+yPradu+"   szybkosc:"+szybkosc);
-        System.out.println(sasiedztwoMoooreaPrady[1] + " " + sasiedztwoMoooreaPrady[2] + " " +sasiedztwoMoooreaPrady[3]);
-       System.out.println(sasiedztwoMoooreaPrady[4] + " " + sasiedztwoMoooreaPrady[5] + " " +sasiedztwoMoooreaPrady[6]);
-       System.out.println(sasiedztwoMoooreaPrady[7] + " " + sasiedztwoMoooreaPrady[8] + " " +sasiedztwoMoooreaPrady[9]);
-
-
+        MooreNeighborhood[5] = 100 / currentPower;
+        double normalizacja = sumOfArray(MooreNeighborhood);
+        for (int i = 0; i < MooreNeighborhood.length; i++) MooreNeighborhood[i] /= normalizacja;
+        // System.out.println("xpradu:" + xCurrent + "   yprdu:" + yCurrent + "   currentPower:" + currentPower);
+        // System.out.println(MooreNeighborhood[1] + " " + MooreNeighborhood[2] + " " + MooreNeighborhood[3]);
+        // System.out.println(MooreNeighborhood[4] + " " + MooreNeighborhood[5] + " " + MooreNeighborhood[6]);
+        //System.out.println(MooreNeighborhood[7] + " " + MooreNeighborhood[8] + " " + MooreNeighborhood[9]);
     }
 
-
-
-    public void pradyMorskie(){
+    public void pradyMorskie() {
         double[][] temp = new double[700][570];
         for (int wiersz = 0; wiersz < 700; wiersz++) {
             for (int kolumna = 0; kolumna < 570; kolumna++) {
                 temp[wiersz][kolumna] = table2[wiersz][kolumna];
-            }}
-
+            }
+        }
         for (int wiersz = 350; wiersz < 699; wiersz++) {
             for (int kolumna = 350; kolumna < 400; kolumna++) {
-                temp[wiersz][kolumna] = (table2[wiersz - 1][kolumna-1]*sasiedztwoMoooreaPrady[1] +
-                        table2[wiersz - 1][kolumna]*sasiedztwoMoooreaPrady[2] +
-                        table2[wiersz - 1][kolumna+1]*sasiedztwoMoooreaPrady[3] +
-                        table2[wiersz][kolumna-1]*sasiedztwoMoooreaPrady[4] +
-                        table2[wiersz ][kolumna]*sasiedztwoMoooreaPrady[5] +
-                        table2[wiersz ][kolumna+1]*sasiedztwoMoooreaPrady[6] +
-                        table2[wiersz + 1][kolumna-1]*sasiedztwoMoooreaPrady[7] +
-                        table2[wiersz + 1][kolumna]*sasiedztwoMoooreaPrady[8] +
-                        table2[wiersz + 1][kolumna+1]*sasiedztwoMoooreaPrady[9] );
-
+                temp[wiersz][kolumna] = (table2[wiersz - 1][kolumna - 1] * MooreNeighborhood[1] +
+                        table2[wiersz - 1][kolumna] * MooreNeighborhood[2] +
+                        table2[wiersz - 1][kolumna + 1] * MooreNeighborhood[3] +
+                        table2[wiersz][kolumna - 1] * MooreNeighborhood[4] +
+                        table2[wiersz][kolumna] * MooreNeighborhood[5] +
+                        table2[wiersz][kolumna + 1] * MooreNeighborhood[6] +
+                        table2[wiersz + 1][kolumna - 1] * MooreNeighborhood[7] +
+                        table2[wiersz + 1][kolumna] * MooreNeighborhood[8] +
+                        table2[wiersz + 1][kolumna + 1] * MooreNeighborhood[9]);
+            }
+        }
+        for (int wiersz = 0; wiersz < 700; wiersz++) {
+            for (int kolumna = 0; kolumna < 570; kolumna++) {
+                table2[wiersz][kolumna] = temp[wiersz][kolumna];
             }
         }
 
-        //table2= temp;
-        for (int wiersz = 0; wiersz < 700; wiersz++) {
-           for (int kolumna = 0; kolumna < 570; kolumna++) {
-               table2[wiersz][kolumna] = temp[wiersz][kolumna];
-           }}
-
     }
-
 
     public void randomtable2() {
         wind = mg.getWind();
@@ -145,19 +133,13 @@ public class Algo2 {
             setWindRatios(r, xWind, yWind);
         }
         /*System.out.println(r[1] + " " + r[2] + " " +r[3]);
-		System.out.println(r[4] + " " + r[5] + " " +r[6]);
+        System.out.println(r[4] + " " + r[5] + " " +r[6]);
 		System.out.println(r[7] + " " + r[8] + " " +r[9]);
 		System.out.println(yDirection + " " + xDirection + " " + windPower);
 		System.out.println("xWind: " + xWind + " yWind: " + yWind);
 		*/
 
         sumOfWindRatios = sumOfArray(r);
-        //	System.out.println("suma: " + sumOfWindRatios);
-        //	System.out.println("windRatio: " + windRatio);
-
-//		showRatios(pitagorasRatio, xWind, yWind, r, xDirection, yDirection, windPower);
-
-
         for (int i = 1; i < 699; i++) {
             for (int j = 1; j < 569; j++) {
                 temp[i][j] = (2 * (table2[i - 1][j] + table2[i + 1][j] + table2[i][j - 1] + table2[i][j + 1]) + 4 * table2[i][j]
@@ -165,17 +147,6 @@ public class Algo2 {
 
             }
         }
-	/* OPCJA 1	 
-		 for(int i=345; i<355; i++){
-			 for(int j=285; j<290; j++){
-				 temp[i][j] = temp[i][j]+1;
-			 }
-		 }	 
-	*/
-        // OPCJA 	2
-
-
-
         for (int i = 0; i < 700; i++) {
             for (int j = 0; j < 570; j++) {
                 table2[i][j] = temp[i][j];
