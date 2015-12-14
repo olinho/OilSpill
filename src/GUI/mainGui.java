@@ -28,11 +28,11 @@ public class mainGui extends JFrame {
 	static double thickness=2;
 
 	double [][] temp = new double[700][570];
-	static double[][] table2 = new double[700][570];
+	static double[][] table2 = new double[708][578];
     static double[][] poprzednia = new double[700][570];
 	static byte[][] table;
 	private Algo a;
-	private int ileAgentow;
+	private int wspParowania;
 	private Wind wind;
 	private JPanel buttonPanel;
 	private JPanel windPanel;
@@ -53,8 +53,8 @@ public class mainGui extends JFrame {
 	private JLabel yLabel;
 	private JTextField wspXTextField;
 	private JTextField wspYTextField;
-	private JLabel ileAgentowLabel;
-	private JTextField ileAgentowField;
+	private JLabel wspParowaniaLabel;
+	private JTextField wspParowaniaField;
 
 	private JTextField powerTextFieldPrad;
 	private JTextField wspXTextFieldPrad;
@@ -116,8 +116,8 @@ public class mainGui extends JFrame {
 		yLabel = new JLabel();
 		wspXTextField = new JTextField();
 		wspYTextField = new JTextField();
-		ileAgentowLabel = new JLabel();
-		ileAgentowField = new JTextField();
+		wspParowaniaLabel = new JLabel();
+		wspParowaniaField = new JTextField();
 
 		pradPanel = new JPanel();
 		powerTextFieldPrad = new JTextField();
@@ -229,10 +229,10 @@ public class mainGui extends JFrame {
 		okButton.setText("OK");
 
 		xLabel.setForeground(new java.awt.Color(2, 9, 126));
-		xLabel.setText("X:");
+		xLabel.setText("Y:");
 
 		yLabel.setForeground(new java.awt.Color(2, 9, 126));
-		yLabel.setText("Y:");
+		yLabel.setText("X:");
 
 		wspYTextField.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 		wspYTextField.addActionListener(new ActionListener() {
@@ -327,10 +327,10 @@ public class mainGui extends JFrame {
 		okButtonPrad.setText("OK");
 
 		xLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
-		xLabelPrad.setText("X:");
+		xLabelPrad.setText("Y:");
 
 		yLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
-		yLabelPrad.setText("Y:");
+		yLabelPrad.setText("X:");
 
 		wspYTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 		wspYTextFieldPrad.addActionListener(new ActionListener() {
@@ -395,10 +395,10 @@ public class mainGui extends JFrame {
 				);
 
 
-		ileAgentowLabel.setForeground(new java.awt.Color(2, 9, 126));
-		ileAgentowLabel.setText("Ilość agentów:");
+		wspParowaniaLabel.setForeground(new java.awt.Color(2, 9, 126));
+		wspParowaniaLabel.setText("Wsp. parowania:");
 
-		ileAgentowField.setText("10");
+		wspParowaniaField.setText("10");
 
 		GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
 		buttonPanel.setLayout(buttonPanelLayout);
@@ -413,9 +413,9 @@ public class mainGui extends JFrame {
 								.addComponent(pradPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								
 								.addGroup(buttonPanelLayout.createSequentialGroup()
-										.addComponent(ileAgentowLabel)
+										.addComponent(wspParowaniaLabel)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(ileAgentowField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(wspParowaniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE)))
 										.addContainerGap())
 				);
@@ -430,8 +430,8 @@ public class mainGui extends JFrame {
 						.addComponent(pradPanel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 						.addGap(32, 32, 32)
 						.addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(ileAgentowLabel)
-								.addComponent(ileAgentowField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addComponent(wspParowaniaLabel)
+								.addComponent(wspParowaniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
 
 								.addComponent(enythingButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
@@ -501,7 +501,7 @@ public class mainGui extends JFrame {
 	private void startButtonActionPerformed(ActionEvent evt) {                                              
 		a = new Algo();
 		algo2 = new Algo2(this);
-		//ileAgentow = Integer.parseInt(ileAgentowField.getText());
+		//wspParowania = Integer.parseInt(wspParowaniaField.getText());
 		int t = 0;
 
 		for(int i=0; i<700; i++){
@@ -518,8 +518,8 @@ public class mainGui extends JFrame {
 		 }	 
 		 */
 		//wersja Olka z iloscia agentow
-		/*for(int i=330; i<330+ileAgentow; i++){
-			 for(int j=270; j<270+ileAgentow; j++){
+		/*for(int i=330; i<330+wspParowania; i++){
+			 for(int j=270; j<270+wspParowania; j++){
 				 getTable2()[i][j] = thickness;
 			 }
 		 }	
@@ -528,6 +528,7 @@ public class mainGui extends JFrame {
 
 		algo2.pradMorskiMaska(Double.parseDouble(wspXTextFieldPrad.getText()),Double.parseDouble(wspYTextFieldPrad.getText()),Double.parseDouble(powerTextFieldPrad.getText()));
 		while(t<5000){
+			
 			if(t<300) algo2.dolewanie();
 			if(t % 100==0)System.out.println("time "+t);
 
@@ -554,7 +555,7 @@ public class mainGui extends JFrame {
 	                e.printStackTrace();
 	            }*/
 		}
-		//	 a.initialize(ileAgentow);
+		//	 a.initialize(wspParowania);
 		//	 System.out.println("windx"+wind.getX());
 		//	 a.simulate(resultsPanel, wind.getX(), wind.getY());
 		resultsPanel.draw();
