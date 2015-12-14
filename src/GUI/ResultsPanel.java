@@ -20,31 +20,7 @@ public class ResultsPanel extends JPanel {
        // g.fillRect(200, 100, 30, 100);
     }
     
-    public void drawAgents(ArrayList<Agent> agentList){
-        System.out.println("drawagents");
-        Graphics g  = getGraphics();
-
-      //  g.clearRect(2,8,707,573);// //TODO dac tu rozmiary tego pola w oknieG
-        
-        for(int i=0; i<700; i++)
-        	for(int j=0; j<570; j++){
-        		if (mainGui.table[i][j] > 0)
-        			g.drawRect(i,j,1,1);
-        	}
-        
-        
-        
-        
- //    for(int a=0; a<agentList.size(); a++) {
-   //         g.drawRect(agentList.get(a).getX(),agentList.get(a).getY(),1,1);
-     //      
-       // }
-        
-   
-        revalidate();
-        //repaint();
-
-    }
+    
     
     double x;
 
@@ -53,9 +29,9 @@ public class ResultsPanel extends JPanel {
         Graphics g  = getGraphics();
         int t = 0;
       //  g.clearRect(2,8,707,573);// //TODO dac tu rozmiary tego pola w oknieG
-        g.clearRect(0,0,700,570);
-        for(int i=0; i<700; i++)
-        	for(int j=0; j<570; j++){
+     //   g.clearRect(2,6,706,577);
+        for(int i=2; i<706; i++)
+        	for(int j=7; j<577; j++){
         		x = mainGui.table2[i][j];
 					if (x != 0){
 						if(x>17)
@@ -77,10 +53,16 @@ public class ResultsPanel extends JPanel {
 						else if (x>0.1)
 							c = new Color(170,170,170);
 						//c = new Color((int)(255-(127*x/10)),(int)(255-(127*x/10)),(int)(255-(127*x/10)));
-						else c = new Color(0,0,255);
+						else c = new Color(95, 155, 228);
 						g.setColor(c);
-        			if (x>0.1) g.drawRect(j,i,1,1);
+        			//if (x>0.1) 
+        				g.drawRect(i,j,1,1);
         	//		System.out.println((int) (mainGui.table2[i][j]*16));
+					}
+					else{
+						c = new Color(95, 155, 228);
+						g.setColor(c);
+						g.drawRect(i,j,1,1);
 					}
         		
         		
