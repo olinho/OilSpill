@@ -22,12 +22,11 @@ public class CellularAlgorithm {
 
     }
 
-    public void evaporation() {
+    public void evaporation(double intensiviti) {
         for (int wiersz = 0; wiersz < table2.length; wiersz++) {
             for (int kolumna = 0; kolumna < table2[wiersz].length; kolumna++) {
-                if (table2[wiersz][kolumna] > 0.3) table2[wiersz][kolumna] = table2[wiersz][kolumna] - 0.3;
-                else if (table2[wiersz][kolumna] <= 0.3) table2[wiersz][kolumna] = -1;
-                //tu trzeba dobrac ile odejmujemy, pewnie bedzie zalezalo od gestosci ropy
+                if (table2[wiersz][kolumna] > 0.3) table2[wiersz][kolumna] = table2[wiersz][kolumna] - intensiviti;
+                else if (table2[wiersz][kolumna] <= 0.3) table2[wiersz][kolumna] =0;
             }
         }
     }
@@ -231,8 +230,8 @@ public class CellularAlgorithm {
         }
     }
 
-    /*
-     * Wywietla info o współczynnikach i kończy program
+    /**
+     * Wyswietla info o współczynnikach i kończy program
      */
     public void showRatios(double pitagorasRatio, double xWind, double yWind, double[] r, double xDir, double yDir, double windPower) {
         System.out.println("xDirection= " + xDir + "\t yDirection= " + yDir);
@@ -259,7 +258,7 @@ public class CellularAlgorithm {
             r[i] = 0;
     }
 
-    /*
+    /**
      * tworzy standardowš maskę współczynników, nr 5 jest indeksem rozpatrywanego w danym momencie piksela, a pozostałe sš jego otoczeniem
      */
     public void setDefaultRatios(double[] r) {

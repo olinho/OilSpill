@@ -2,16 +2,10 @@ package GUI;
 
 import model.CellularAlgorithm;
 import model.Wind;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -24,13 +18,11 @@ public class mainGui extends JFrame {
 	String xDir;
 	String yDir;
 	String windPow;
-	static double thickness=2;
 
 	double [][] temp = new double[700][570];
 	static double[][] table2 = new double[708][578];
-    static double[][] poprzednia = new double[700][570];
 	static byte[][] table;
-	private int wspParowania;
+	private double evaporationIntensivity;
 	private Wind wind;
 	private JPanel buttonPanel;
 	private JPanel windPanel;
@@ -68,12 +60,7 @@ public class mainGui extends JFrame {
 
 
 	Random generator = new Random();
-	//          private org.jdesktop.beansbinding.BindingGroup bindingGroup;
-	// End of variables declaration              
 
-	/**
-	 * Creates new form mainGui
-	 */
 	public mainGui() {
 		initRatios();
 		initComponents();
@@ -91,7 +78,7 @@ public class mainGui extends JFrame {
 
 
 	@SuppressWarnings("unchecked")
-	// <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
 		table = new byte[700][570];
@@ -293,8 +280,8 @@ public class mainGui extends JFrame {
 								.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 								.addGap(26, 26, 26))
 				);
-		
-		
+
+
 		pradPanel.setBackground(new java.awt.Color(95, 155, 228));
 		pradPanel.setBorder(BorderFactory.createMatteBorder(4, 1, 4, 1, new java.awt.Color(3, 6, 176)));
 		pradPanel.setForeground(new java.awt.Color(3, 6, 176));
@@ -396,7 +383,7 @@ public class mainGui extends JFrame {
 		wspParowaniaLabel.setForeground(new java.awt.Color(2, 9, 126));
 		wspParowaniaLabel.setText("Wsp. parowania:");
 
-		wspParowaniaField.setText("10");
+		wspParowaniaField.setText("0.3");
 
 		GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
 		buttonPanel.setLayout(buttonPanelLayout);
@@ -409,7 +396,7 @@ public class mainGui extends JFrame {
 								.addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(windPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(pradPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								
+
 								.addGroup(buttonPanelLayout.createSequentialGroup()
 										.addComponent(wspParowaniaLabel)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -443,15 +430,6 @@ public class mainGui extends JFrame {
 
 		GroupLayout resultsPanelLayout = new GroupLayout(resultsPanel);
 		resultsPanel.setLayout(resultsPanelLayout);
-		/*   resultsPanelLayout.setHorizontalGroup(
-            resultsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-        );
-        resultsPanelLayout.setVerticalGroup(
-            resultsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-        );
-		 */
 		GroupLayout jmainGuiLayout = new GroupLayout(jmainGui);
 		jmainGui.setLayout(jmainGuiLayout);
 		jmainGuiLayout.setHorizontalGroup(
@@ -492,7 +470,7 @@ public class mainGui extends JFrame {
 		//      bindingGroup.bind();
 
 		pack();
-	}// </editor-fold>                        
+	}// </editor-fold>
 
 
 
@@ -506,66 +484,28 @@ public class mainGui extends JFrame {
 				table2[i][j] = 0;
 			}
 		}
-
-		//rozlana ropa, grubosc to 20
-		/* for(int i=330; i<370; i++){
-			 for(int j=270; j<310; j++){
-				 table2[i][j] = 20;
-			 }
-		 }	 
-		 */
-		//wersja Olka z iloscia agentow
-		/*for(int i=330; i<330+wspParowania; i++){
-			 for(int j=270; j<270+wspParowania; j++){
-				 getTable2()[i][j] = thickness;
-			 }
-		 }	
-		 */
 		resultsPanel.draw();
 
 		cellularAlgorithm.setRatiosInCurrentNeighborhood(Double.parseDouble(wspXTextFieldPrad.getText()), Double.parseDouble(wspYTextFieldPrad.getText()), Double.parseDouble(powerTextFieldPrad.getText()));
 		while(t<5000){
-			
 			if(t<300) cellularAlgorithm.addMoreOil();
 			if(t % 100==0)System.out.println("time "+t);
-
 			cellularAlgorithm.randomtable2();
-			//algo2.evaporation();
+            cellularAlgorithm.evaporation(Double.parseDouble(wspParowaniaField.getText()));
 			cellularAlgorithm.pradyMorskie();
-           // System.arraycopy(table2, 0, poprzednia, 0, table.length);
-
 			resultsPanel.draw();
 			t++;
-
-
-
-
-
-
-
-
-
-
-
-			/*	 try {
-	           //     Thread.sleep(100);
-	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	            }*/
 		}
-		//	 a.initialize(wspParowania);
-		//	 System.out.println("windx"+wind.getX());
-		//	 a.simulate(resultsPanel, wind.getX(), wind.getY());
 		resultsPanel.draw();
 	}    
 
 	private void okButtonActionPerformed(ActionEvent evt) {                                              
 		wind = new Wind(Double.parseDouble(wspXTextField.getText()), Double.parseDouble(wspYTextField.getText()), Integer.parseInt(powerTextField.getText()));
-	}  
+	}
 
-	private void enythingButtonActionPerformed(ActionEvent evt) {                                            
+	private void enythingButtonActionPerformed(ActionEvent evt) {
 
-	}                                          
+	}
 
 
 	public void randomTable(){
@@ -574,35 +514,6 @@ public class mainGui extends JFrame {
 				table[i][j] = (byte) (generator.nextInt(2)-1);
 			}
 		}
-	}
-
-
-
-	public void randomTable2(){
-
-
-		/* for(int i=1; i<699; i++){
-			 for(int j=1; j<569; j++){
-				 temp[i][j] = (2*(table2[i-1][j]+table2[i+1][j]+table2[i][j-1]+table2[i][j+1]) + 4*table2[i][j] 
-						      + (table2[i-1][j-1] + table2[i+1][j+1] + table2[i-1][j+1] + table2[i+1][j-1]))/16;
-
-			 }
-		 }
-
-		 for(int i=345; i<355; i++){
-			 for(int j=285; j<290; j++){
-				 temp[i][j] = temp[i][j]+0.5;
-			 }
-		 }	 
-
-		 for(int i=0; i<700; i++){
-			 for(int j=0; j<570; j++){
-				 table2[i][j] = temp[i][j];
-			 }
-		 }
-		 */
-
-
 	}
 
 
