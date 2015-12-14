@@ -68,7 +68,7 @@ public class mainGui extends JFrame {
 	private JTextField wspYSzerokoscField1;
 	private JLabel wspLabel2;
 	private JLabel xLabel2;
-	private JTextField wspXDlugoscField;
+	private JTextField wspXDlugoscField1;
 	private JTextField wspYDlugoscField1;
 	private JLabel yLabel2;
 
@@ -137,7 +137,7 @@ public class mainGui extends JFrame {
 		wspYSzerokoscField1 = new JTextField();
 		wspLabel2 = new JLabel();
 		xLabel2 = new JLabel();
-		wspXDlugoscField = new JTextField();
+		wspXDlugoscField1 = new JTextField();
 		wspYDlugoscField1 = new JTextField();
 		yLabel2 = new JLabel();
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -365,7 +365,7 @@ public class mainGui extends JFrame {
         xLabel2.setForeground(new java.awt.Color(2, 9, 126));
         xLabel2.setText("X:");
 
-        wspXDlugoscField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+        wspXDlugoscField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
 
         yLabel2.setForeground(new java.awt.Color(2, 9, 126));
@@ -425,7 +425,7 @@ public class mainGui extends JFrame {
                                     .addGroup(pradPanelLayout.createSequentialGroup()
                                         .addComponent(xLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(wspXDlugoscField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(wspXDlugoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(35, 35, 35)
                                         .addComponent(yLabel2)
                                         .addGap(8, 8, 8)
@@ -469,7 +469,7 @@ public class mainGui extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pradPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xLabel2)
-                    .addComponent(wspXDlugoscField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wspXDlugoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(yLabel2)
                     .addComponent(wspYDlugoscField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
