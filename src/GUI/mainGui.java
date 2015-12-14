@@ -536,6 +536,7 @@ public class mainGui extends JFrame {
 			//algo2.parowanie();
 			algo2.pradyMorskie();
            // System.arraycopy(table2, 0, poprzednia, 0, table.length);
+			if(t%8 == 0)
 			resultsPanel.draw();
 			t++;
 
