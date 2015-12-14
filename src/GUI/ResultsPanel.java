@@ -85,7 +85,7 @@ public class ResultsPanel extends JPanel {
         				g.drawRect(i,j,1,1);
         	//		System.out.println((int) (mainGui.table2[i][j]*16));
 					}
-					else{
+					else if (x<0.1 && x != 0){
 						c = new Color(95, 155, 228);
 						g.setColor(c);
 						g.drawRect(i,j,1,1);
