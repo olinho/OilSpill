@@ -22,7 +22,7 @@ public class CellularAlgorithm {
 
     }
 
-    
+
     public void evaporation(double intensiviti) {
         for (int wiersz = 0; wiersz < table2.length; wiersz++) {
             for (int kolumna = 0; kolumna < table2[wiersz].length; kolumna++) {
@@ -82,15 +82,15 @@ public class CellularAlgorithm {
         //System.out.println(MooreNeighborhood[7] + " " + MooreNeighborhood[8] + " " + MooreNeighborhood[9]);
     }
 
-    public void pradyMorskie() {
+    public void pradyMorskie(int startX,int endX, int startY,int endY) {
         double[][] temp = new double[700][570];
         for (int wiersz = 0; wiersz < 700; wiersz++) {
             for (int kolumna = 0; kolumna < 570; kolumna++) {
                 temp[wiersz][kolumna] = table2[wiersz][kolumna];
             }
         }
-        for (int wiersz = 350; wiersz < 699; wiersz++) {
-            for (int kolumna = 350; kolumna < 400; kolumna++) {
+        for (int wiersz = startY; wiersz < endY; wiersz++) {
+            for (int kolumna = startX; kolumna < endX; kolumna++) {
                 temp[wiersz][kolumna] = (table2[wiersz - 1][kolumna - 1] * MooreNeighborhood[1] +
                         table2[wiersz - 1][kolumna] * MooreNeighborhood[2] +
                         table2[wiersz - 1][kolumna + 1] * MooreNeighborhood[3] +
