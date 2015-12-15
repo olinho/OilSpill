@@ -272,7 +272,7 @@ public class mainGui extends JFrame {
                                         .addComponent(powerTextField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
                         .addGroup(windPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(xLabel)
+                                .addComponent(yLabel)
                                 .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(windPanelLayout.createSequentialGroup()
                                                 .addGap(24, 24, 24)
@@ -280,11 +280,11 @@ public class mainGui extends JFrame {
                                                 .addGap(0, 0, Short.MAX_VALUE))
                                         .addGroup(windPanelLayout.createSequentialGroup()
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(wspXTextField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                                                .addGap(38, 38, 38)
-                                                .addComponent(yLabel)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(wspYTextField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+                                                .addGap(38, 38, 38)
+                                                .addComponent(xLabel)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(wspXTextField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
                                                 .addContainerGap())))
         );
         windPanelLayout.setVerticalGroup(
@@ -295,10 +295,10 @@ public class mainGui extends JFrame {
                                 .addComponent(wspLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(windPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(wspXTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(xLabel)
+                                        .addComponent(wspYTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(yLabel)
-                                        .addComponent(wspYTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(xLabel)
+                                        .addComponent(wspXTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(powerLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -323,56 +323,73 @@ public class mainGui extends JFrame {
         //   org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, titlePanel, org.jdesktop.beansbinding.ObjectProperty.create(), windLabel, org.jdesktop.beansbinding.BeanProperty.create("border"));
         //     bindingGroup.addBinding(binding);
 
-        wspLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
-        wspLabelPrad.setText("   Podaj współrzędne");
+		wspLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
+		wspLabelPrad.setText("   Podaj współrzędne");
 
-        wspYTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
-        wspXTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+		wspYTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+		wspXTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
-        powerLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
-        powerLabelPrad.setText(" Podaj siłę");
+		powerLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
+		powerLabelPrad.setText(" Podaj siłę");
 
-        powerTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+		powerTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
 
-        okButtonPrad.setForeground(new java.awt.Color(2, 9, 126));
-        okButtonPrad.setText("OK");
+		okButtonPrad.setForeground(new java.awt.Color(2, 9, 126));
+		okButtonPrad.setText("OK");
 
-        xLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
-        xLabelPrad.setText("Y:");
+		xLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
+		xLabelPrad.setText("X:");
 
-        yLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
-        yLabelPrad.setText("X:");
+		yLabelPrad.setForeground(new java.awt.Color(2, 9, 126));
+		yLabelPrad.setText("Y:");
 
-        wspYTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+		wspYTextFieldPrad.setBorder(BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
-        wspLabel1.setForeground(new java.awt.Color(2, 9, 126));
-        wspLabel1.setText("Zakres X");
+		wspLabel1.setForeground(new java.awt.Color(2, 9, 126));
+        wspLabel1.setText("Określ długość geo.");
 
         xLabel1.setForeground(new java.awt.Color(2, 9, 126));
-        xLabel1.setText("Od");
+        xLabel1.setText("X:");
 
         startX.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
         yLabel1.setForeground(new java.awt.Color(2, 9, 126));
-        yLabel1.setText("DO");
+        yLabel1.setText("Y:");
+
+        startY.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
+        
+
+        wspLabel2.setForeground(new java.awt.Color(2, 9, 126));
+        wspLabel2.setText("Określ szerokość geo.");
+
+        xLabel2.setForeground(new java.awt.Color(2, 9, 126));
+        xLabel2.setText("X:");
 
         endX.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
-        wspLabel2.setForeground(new java.awt.Color(2, 9, 126));
-        wspLabel2.setText("Zakres Y");
-
-        xLabel2.setForeground(new java.awt.Color(2, 9, 126));
-        xLabel2.setText("OD");
-
-        startY.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
-
 
         yLabel2.setForeground(new java.awt.Color(2, 9, 126));
-        yLabel2.setText("DO");
+        yLabel2.setText("Y:");
 
         endY.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(3, 6, 176)));
 
+        wspXTextField.setText("-1");
+        wspYTextField.setText("2");
+        
+        wspXTextFieldPrad.setText("-1");
+        wspYTextFieldPrad.setText("0");
+                
+        powerTextField.setText("10");
+        powerTextFieldPrad.setText("700");
+        
+        startX.setText("350");
+        endX.setText("450");
+        
+        startY.setText("1");
+        endY.setText("699");
+        
+        
         javax.swing.GroupLayout pradPanelLayout = new javax.swing.GroupLayout(pradPanel);
         pradPanel.setLayout(pradPanelLayout);
         pradPanelLayout.setHorizontalGroup(
@@ -598,7 +615,7 @@ public class mainGui extends JFrame {
         }
         resultsPanel.draw();
 
-        cellularAlgorithm.setRatiosInCurrentNeighborhood(Double.parseDouble(wspXTextFieldPrad.getText()), Double.parseDouble(wspYTextFieldPrad.getText()), Double.parseDouble(powerTextFieldPrad.getText()));
+        cellularAlgorithm.setRatiosInCurrentNeighborhood(-Double.parseDouble(wspYTextFieldPrad.getText()), Double.parseDouble(wspXTextFieldPrad.getText()), Double.parseDouble(powerTextFieldPrad.getText()));
         while(t<5000){
             if(t<300) cellularAlgorithm.addMoreOil();
             if(t % 100==0)System.out.println("time "+t);
@@ -615,7 +632,7 @@ public class mainGui extends JFrame {
     }
 
     private void okButtonActionPerformed(ActionEvent evt) {
-        wind = new Wind(Double.parseDouble(wspXTextField.getText()), Double.parseDouble(wspYTextField.getText()), Integer.parseInt(powerTextField.getText()));
+        wind = new Wind(-Double.parseDouble(wspXTextField.getText()), Double.parseDouble(wspYTextField.getText()), Integer.parseInt(powerTextField.getText()));
     }
 
     private void enythingButtonActionPerformed(ActionEvent evt) {
