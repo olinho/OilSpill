@@ -533,15 +533,15 @@ public class mainGui extends JFrame {
 				                
 								//.addComponent(startButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								//.addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(windPanel, 150,150, 150)
-								.addComponent(pradPanel, 140,150,150)
+								.addComponent(windPanel, 150,153, 153)
+								.addComponent(pradPanel, 140,153,153)
 
 								.addGroup(buttonPanelLayout.createSequentialGroup()
 										.addComponent(wspParowaniaLabel)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(wspParowaniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addGap(0, 0, Short.MAX_VALUE)))
-										.addContainerGap())
+										
+										.addGap(2,2,2))))
 				);
 		buttonPanelLayout.setVerticalGroup(
 				buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -554,11 +554,11 @@ public class mainGui extends JFrame {
                 .addComponent(windPanel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 						.addGap(2, 2, 2)
 						.addComponent(pradPanel, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
-						.addGap(12, 12, 12)
+						.addGap(4, 4, 4)
 						.addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(wspParowaniaLabel)
 								.addComponent(wspParowaniaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+							//	.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
 						)
 						//	.addComponent(enythingButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
 						//	.addGap(29, 29, 29))
@@ -631,15 +631,18 @@ public class mainGui extends JFrame {
 		//wspParowania = Integer.parseInt(wspParowaniaField.getText());
 		int t = 0;
 
-		for(int i=0; i<700; i++){
+		for(int i=0; i<703; i++){
 			for(int j=0; j<570; j++){
 				table2[i][j] = 0;
+				if(i>650 + generator.nextInt(20)) table2[i][j]=-1;
 			}
 		}
+		
+		
 		resultsPanel.draw();
 
 		cellularAlgorithm.setRatiosInCurrentNeighborhood(-Double.parseDouble(wspYTextFieldPrad.getText()), Double.parseDouble(wspXTextFieldPrad.getText()), Double.parseDouble(powerTextFieldPrad.getText()));
-		while(t<5000){
+		while(t<1000){
 			if(t<500) cellularAlgorithm.addMoreOil();
 			if(t % 100==0)System.out.println("time "+t);
 			cellularAlgorithm.randomtable2();
