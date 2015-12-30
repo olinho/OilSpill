@@ -22,7 +22,7 @@ public class ResultsPanel extends JPanel {
         double x;
         Graphics g = getGraphics();
         for (int i = 2; i < 706; i++)
-            for (int j = 7; j < 577; j++) {
+            for (int j = 8; j < 577; j++) {
                 x = mainGui.table2[i][j];
                 if (x != 0) {
                     if (x > 17)
@@ -46,10 +46,16 @@ public class ResultsPanel extends JPanel {
                     else c = new Color(95, 155, 228);
                     g.setColor(c);
                     g.drawRect(i, j, 1, 1);
-                } else if (x < 0.1 && x != 0) {
+                } 
+                if (x < 0.1 && x != 0) {
                     c = new Color(95, 155, 228);
                     g.setColor(c);
                     g.drawRect(i, j, 1, 1);
+                }
+                if(x==-1){
+                	c = new Color(0,255,0);
+                	 g.setColor(c);
+                     g.drawRect(i, j, 1, 1);
                 }
             }
         revalidate();
