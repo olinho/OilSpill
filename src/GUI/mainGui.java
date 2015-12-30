@@ -591,7 +591,7 @@ public class mainGui extends JFrame {
 								.addGroup(jmainGuiLayout.createSequentialGroup()
 										.addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(resultsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+										.addComponent(resultsPanel, GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)))
 										.addContainerGap())
 				);
 		jmainGuiLayout.setVerticalGroup(
