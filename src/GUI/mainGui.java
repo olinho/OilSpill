@@ -527,9 +527,9 @@ public class mainGui extends JFrame {
 						.addContainerGap()
 						.addGroup(buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 								.addGroup(buttonPanelLayout.createSequentialGroup()
-				                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+				                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
 				                       // .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-				                        .addComponent(stopButton, 60,75,75))
+				                        .addComponent(stopButton, 60,76,76))
 				                
 								//.addComponent(startButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								//.addComponent(enythingButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
